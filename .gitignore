@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.env
+/.vscode/settings.json
+db/*.mdf
+db/*_log.ldf
