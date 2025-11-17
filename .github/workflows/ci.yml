@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install and build client (root)
+      working-directory: ${{ github.workspace }}
+      run: |
+        npm ci
+        npm run build
+
+    - name: Install server dependencies
+      working-directory: ${{ github.workspace }}/server
+      run: |
+        npm ci
+
+    - name: Lint check (basic)
+      run: |
+        echo "No linter configured; ensure dependencies install and client builds"
