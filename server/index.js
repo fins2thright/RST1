@@ -1,16 +1,29 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const HumanResourceRoutes = require('./routes/humanResourceRoutes');
-const swaggerUi = require('swagger-ui-express');
-const openapi = require('./openapi.json');
+// index.js: CLI entry that starts the app; keep implementation in app.js
+const { createApp } = require('./app');
 
-const app = express();
-app.use(bodyParser.json());
+if (require.main === module) {
+  const app = createApp();
+  const PORT = process.env.PORT || 4000;
+  const server = app.listen(PORT, '0.0.0.0', () =>
+    console.log(`Human-Resource service listening on port ${PORT}`)
+  );
 
-app.use('/human-resources', HumanResourceRoutes);
+  server.on('error', (err) => {
+    console.error('Server error:', err);
+    process.exit(1);
+  });
 
-// Swagger UI
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(openapi));
+  process.on('uncaughtException', (err) => {
+    console.error('Uncaught exception:', err.stack || err);
+    process.exit(1);
+  });
 
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`Human-Resource service listening on port ${PORT}`));
+  process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection:', reason);
+    process.exit(1);
+  });
+}
+
+module.exports = { createApp };
+
+module.exports = { createApp };

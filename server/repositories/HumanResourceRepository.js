@@ -1,11 +1,11 @@
-const { sql, pool } = require('../db/db');
+const { sql, getPool } = require('../db/db');
 
 class HumanResourceRepository {
   constructor() {}
 
   async getAll() {
     try {
-      const p = await pool;
+      const p = await getPool();
       const result = await p.request().query('SELECT Id, FirstName, LastName, Email, Position, CreatedAt FROM dbo.HumanResources');
       return result.recordset;
     } catch (err) {
@@ -16,7 +16,7 @@ class HumanResourceRepository {
 
   async getById(id) {
     try {
-      const p = await pool;
+      const p = await getPool();
       const result = await p.request().input('id', sql.UniqueIdentifier, id).query('SELECT Id, FirstName, LastName, Email, Position, CreatedAt FROM dbo.HumanResources WHERE Id = @id');
       return result.recordset[0];
     } catch (err) {
@@ -27,7 +27,7 @@ class HumanResourceRepository {
 
   async create(h) {
     try {
-      const p = await pool;
+      const p = await getPool();
       const request = p.request();
       request.input('firstName', sql.NVarChar(100), h.firstName);
       request.input('lastName', sql.NVarChar(100), h.lastName);
@@ -44,7 +44,7 @@ class HumanResourceRepository {
 
   async update(id, h) {
     try {
-      const p = await pool;
+      const p = await getPool();
       const request = p.request();
       request.input('id', sql.UniqueIdentifier, id);
       request.input('firstName', sql.NVarChar(100), h.firstName);
@@ -62,7 +62,7 @@ class HumanResourceRepository {
 
   async delete(id) {
     try {
-      const p = await pool;
+      const p = await getPool();
       const request = p.request();
       request.input('id', sql.UniqueIdentifier, id);
       const result = await request.query('DELETE FROM dbo.HumanResources OUTPUT DELETED.Id WHERE Id = @id');

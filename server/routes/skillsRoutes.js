@@ -1,7 +1,7 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 
-module.exports = function createHumanResourceRouter(repo) {
+module.exports = function createSkillsRouter(repo) {
   const router = express.Router();
 
   router.get('/', async (req, res) => {
@@ -27,10 +27,8 @@ module.exports = function createHumanResourceRouter(repo) {
 
   router.post(
     '/',
-    body('firstName').isString().trim().notEmpty(),
-    body('lastName').isString().trim().notEmpty(),
-    body('email').optional().isEmail(),
-    body('position').optional().isString().trim(),
+    body('skillName').isString().trim().notEmpty(),
+    body('description').optional().isString().trim(),
     async (req, res) => {
       const errors = validationResult(req);
       if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
@@ -47,10 +45,8 @@ module.exports = function createHumanResourceRouter(repo) {
 
   router.put(
     '/:id',
-    body('firstName').optional().isString().trim().notEmpty(),
-    body('lastName').optional().isString().trim().notEmpty(),
-    body('email').optional().isEmail(),
-    body('position').optional().isString().trim(),
+    body('skillName').optional().isString().trim().notEmpty(),
+    body('description').optional().isString().trim(),
     async (req, res) => {
       const errors = validationResult(req);
       if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });

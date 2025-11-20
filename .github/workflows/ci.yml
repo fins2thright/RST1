@@ -32,6 +32,17 @@ jobs:
       run: |
         npm ci
 
+    - name: Run server tests
+      working-directory: ${{ github.workspace }}/server
+      run: |
+        npm test
+
+    - name: Lint client
+      working-directory: ${{ github.workspace }}
+      run: |
+        npm ci
+        npm run lint
+
     - name: Lint check (basic)
       run: |
         echo "No linter configured; ensure dependencies install and client builds"

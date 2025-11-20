@@ -12,6 +12,9 @@
         "-File",
         "${workspaceFolder}/scripts/create-localdb.ps1"
       ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
       "presentation": {
         "reveal": "always",
         "panel": "shared"
@@ -28,6 +31,7 @@
         "dev"
       ],
       "group": "build",
+      "options": { "cwd": "${workspaceFolder}" },
       "presentation": {
         "reveal": "always",
         "panel": "dedicated"
@@ -45,6 +49,7 @@
         "-Command",
         "cd ${workspaceFolder} ; cd server ; npm run dev"
       ],
+      "options": { "cwd": "${workspaceFolder}" },
       "presentation": {
         "reveal": "always",
         "panel": "dedicated"
