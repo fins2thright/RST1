@@ -176,7 +176,7 @@ class GoogleSearchService {
     }
 
     // Normalize score (0-1 range)
-    const normalizedScore = maxScore > 0 ? Math.min(1.0, score / maxScore + positionBonus) : positionBonus;
+    const normalizedScore = maxScore > 0 ? Math.min(1.0, score / maxScore) : positionBonus;
 
     return Math.round(normalizedScore * 100) / 100; // Round to 2 decimal places
   }
