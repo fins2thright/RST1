@@ -47,6 +47,14 @@ export default function Navigation({ currentPage, onNavigate }) {
               Work History
             </button>
           </li>
+          <li>
+            <button
+              className={`nav-link ${currentPage === 'product-identifier' ? 'active' : ''}`}
+              onClick={() => onNavigate('product-identifier')}
+            >
+              Product Identifier
+            </button>
+          </li>
         </ul>
       </div>
     </nav>

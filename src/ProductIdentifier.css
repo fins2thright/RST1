@@ -1,0 +1,295 @@
+.product-identifier {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.product-identifier h1 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #7f8c8d;
+  margin-bottom: 30px;
+}
+
+.error-message {
+  background-color: #fee;
+  border: 1px solid #fcc;
+  color: #c33;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.input-section,
+.questioning-section,
+.results-section {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #34495e;
+}
+
+.form-group textarea,
+.form-group input[type='text'] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group input[type='file'] {
+  padding: 8px 0;
+}
+
+.image-preview {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.image-preview img {
+  max-width: 400px;
+  max-height: 300px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-link {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary {
+  background-color: #3498db;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #2980b9;
+}
+
+.btn-secondary {
+  background-color: #95a5a6;
+  color: white;
+  margin-top: 20px;
+}
+
+.btn-secondary:hover {
+  background-color: #7f8c8d;
+}
+
+.btn-link {
+  background-color: #27ae60;
+  color: white;
+  margin-top: 10px;
+}
+
+.btn-link:hover {
+  background-color: #229954;
+}
+
+.progress-bar {
+  margin-bottom: 30px;
+}
+
+.progress-text {
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 8px;
+}
+
+.progress-bar-fill {
+  width: 100%;
+  height: 8px;
+  background-color: #ecf0f1;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-inner {
+  height: 100%;
+  background-color: #3498db;
+  transition: width 0.3s ease;
+}
+
+.previous-answers {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 4px;
+  margin-bottom: 30px;
+}
+
+.previous-answers h3 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 16px;
+}
+
+.answer-item {
+  margin-bottom: 12px;
+  padding: 10px;
+  background-color: white;
+  border-left: 3px solid #3498db;
+  border-radius: 2px;
+}
+
+.question-box {
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-radius: 4px;
+}
+
+.question-box h2 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 18px;
+}
+
+.question-text {
+  font-size: 16px;
+  color: #34495e;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.results-section h2 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.results-summary {
+  color: #7f8c8d;
+  margin-bottom: 25px;
+}
+
+.characteristics-box {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 4px;
+  margin-bottom: 30px;
+}
+
+.characteristics-box h3 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 16px;
+}
+
+.characteristics-box ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.characteristics-box li {
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.characteristics-box li:last-child {
+  border-bottom: none;
+}
+
+.candidates-list {
+  display: grid;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.candidate-card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  transition: box-shadow 0.2s;
+}
+
+.candidate-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.candidate-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #3498db;
+}
+
+.candidate-header h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 18px;
+}
+
+.confidence-badge {
+  background-color: #3498db;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.candidate-details {
+  margin-bottom: 15px;
+}
+
+.detail-row {
+  display: flex;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #7f8c8d;
+  width: 140px;
+  flex-shrink: 0;
+}
+
+.detail-value {
+  color: #34495e;
+}
+
+.matched-characteristics {
+  background-color: #f8f9fa;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #34495e;
+  margin-bottom: 15px;
+}

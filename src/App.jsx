@@ -5,6 +5,7 @@ import SkillsList from './SkillsList';
 import ResourceSkillsManager from './ResourceSkillsManager';
 import CompaniesList from './CompaniesList';
 import WorkHistoryManager from './WorkHistoryManager';
+import ProductIdentifier from './ProductIdentifier';
 import './App.css';
 
 export default function App() {
@@ -41,6 +42,7 @@ export default function App() {
         {currentPage === 'work-history' && (
           <WorkHistoryManager preSelectedResourceId={selectedResourceId} />
         )}
+        {currentPage === 'product-identifier' && <ProductIdentifier />}
       </main>
     </div>
   );
