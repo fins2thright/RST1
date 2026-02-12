@@ -1,4 +1,5 @@
 // index.js: CLI entry that starts the app; keep implementation in app.js
+require('dotenv').config();
 const { createApp } = require('./app');
 
 if (require.main === module) {

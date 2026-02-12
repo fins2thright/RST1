@@ -5,13 +5,15 @@ const SkillsRoutes = require('./routes/skillsRoutes');
 const ResourceSkillsRoutes = require('./routes/resourceSkillsRoutes');
 const CompaniesRoutes = require('./routes/companiesRoutes');
 const WorkHistoryRoutes = require('./routes/workHistoryRoutes');
+const ProductAgentRoutes = require('./routes/productAgentRoutes');
 
 function createApp(
   repository,
   skillsRepository,
   resourceSkillsRepository,
   companiesRepository,
-  workHistoryRepository
+  workHistoryRepository,
+  productAgentRepository
 ) {
   const app = express();
 
@@ -27,7 +29,8 @@ function createApp(
     }
   });
 
-  app.use(bodyParser.json());
+  app.use(bodyParser.json({ limit: '10mb' }));
+  app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
   let hrRepo = repository;
   if (!hrRepo) {
     // require repository lazily so tests that mock the repo don't trigger DB connection on require
@@ -59,11 +62,18 @@ function createApp(
     workHistoryRepo = new WorkHistoryRepository();
   }
 
+  let productAgentRepo = productAgentRepository;
+  if (!productAgentRepo) {
+    const ProductAgentRepository = require('./repositories/ProductAgentRepository');
+    productAgentRepo = new ProductAgentRepository();
+  }
+
   app.use('/human-resources', HumanResourceRoutes(hrRepo));
   app.use('/skills', SkillsRoutes(skillsRepo));
   app.use('/resource-skills', ResourceSkillsRoutes(resourceSkillsRepo));
   app.use('/companies', CompaniesRoutes(companiesRepo));
   app.use('/work-history', WorkHistoryRoutes(workHistoryRepo));
+  app.use('/product-agent', ProductAgentRoutes(productAgentRepo));
 
   // Swagger UI (optional)
   try {
