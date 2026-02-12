@@ -1,8 +1,12 @@
+const GoogleSearchService = require('./GoogleSearchService');
+
 /**
  * ProductAgentService - Core logic for product identification workflow
  */
 class ProductAgentService {
   constructor() {
+    this.googleSearch = new GoogleSearchService();
+    
     // Define possible questions to ask based on product characteristics
     this.questionTemplates = [
       {
@@ -216,23 +220,82 @@ class ProductAgentService {
   }
 
   /**
-   * Mock search function - simulates product search
-   * In production, this would call real search APIs
+   * Search for products using Google Custom Search API
+   * Falls back to mock data if API is not configured
    */
   async searchProducts(queries, characteristics) {
-    // This is a mock implementation
-    // In production, you would:
-    // 1. Call Google Search API / Bing API
-    // 2. Call retailer APIs (Amazon, eBay, etc.)
-    // 3. Use reverse image search APIs (Google Vision, TinEye)
-    // 4. Search manufacturer databases
+    // Try to use Google Search API if configured
+    if (this.googleSearch.isConfigured()) {
+      try {
+        return await this.searchProductsWithGoogle(queries, characteristics);
+      } catch (error) {
+        console.error('Google Search API failed, falling back to mock data:', error.message);
+        // Fall through to mock data
+      }
+    } else {
+      console.log('Google Search API not configured, using mock data');
+    }
 
+    // Fallback to mock data
     const mockCandidates = this.generateMockCandidates(characteristics);
     return mockCandidates;
   }
 
   /**
-   * Generate mock product candidates for demonstration
+   * Search products using Google Custom Search API
+   */
+  async searchProductsWithGoogle(queries, characteristics) {
+    const allCandidates = [];
+
+    // Search using text queries
+    const textQueries = queries.filter(q => q.type === 'text');
+    
+    for (const queryObj of textQueries) {
+      try {
+        const searchResults = await this.googleSearch.search(queryObj.query, 5);
+        const candidates = this.googleSearch.transformToProductCandidates(
+          searchResults,
+          characteristics
+        );
+        
+        // Apply weight to candidates
+        candidates.forEach(candidate => {
+          candidate.confidence = candidate.confidence * queryObj.weight;
+        });
+        
+        allCandidates.push(...candidates);
+      } catch (error) {
+        console.error(`Error searching for "${queryObj.query}":`, error.message);
+      }
+    }
+
+    // Remove duplicates based on URL
+    const uniqueCandidates = this.deduplicateCandidates(allCandidates);
+
+    // Sort by confidence
+    uniqueCandidates.sort((a, b) => b.confidence - a.confidence);
+
+    // Return top results
+    return uniqueCandidates.slice(0, 10);
+  }
+
+  /**
+   * Remove duplicate candidates based on URL
+   */
+  deduplicateCandidates(candidates) {
+    const seen = new Set();
+    return candidates.filter(candidate => {
+      if (seen.has(candidate.url)) {
+        return false;
+      }
+      seen.add(candidate.url);
+      return true;
+    });
+  }
+
+  /**
+   * Mock search function - simulates product search
+   * Used as fallback when Google API is not configured
    */
   generateMockCandidates(characteristics) {
     const candidates = [];
